@@ -1,5 +1,4 @@
---[[-- # Labelled-lists - custom labelled lists
- in Pandoc's markdown.
+--[[-- # Labelled-lists - Pandoc / Quarto filter for labelled lists
 
 @author Julien Dutant <julien.dutant@kcl.ac.uk>
 @copyright 2021-2024 Julien Dutant

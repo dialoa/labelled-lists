@@ -11,19 +11,51 @@ outputs in LaTeX/PDF, HTML and JATS XML. Instead of bullets or
 numbers, list items are given custom text labels. The text labels can
 include markdown formatting. 
 
-Usage
------
+Installation
+------------
 
-### Loading the filter
+### Plain pandoc
 
-The filter is loaded with the Pandoc `-L` or `--lua-filter` option. 
+Get `labelled-lists.lua` from the Releases page and save it somewhere
+Pandoc can find (see [PandocMan] for details).
 
-```bash pandoc -L path/to/labelled-lists.lua source.md -o output.html
+Pass the filter to Pandoc via the `--lua-filter` (or `-L`) command
+line option.
+
+    pandoc --lua-filter imagify.lua ...
+
+### Quarto
+
+Install this filter as a Quarto extension with
+
+    quarto install extension dialoa/labelled-lists
+
+and use it by adding `labelled-lists` to the `filters` entry
+in their YAML header:
+
+``` yaml
+---
+filters:
+- labelled-lists
+---
 ```
 
-If the filter is in Pandoc's `$DATADIR` there is no need to give its
-path. See [Pandoc's manual[
-(https://pandoc.org/MANUAL.html#general-options) for details.
+### R Markdown
+
+Use `pandoc_args` to invoke the filter. See the [R Markdown
+Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/lua-filters.html)
+for details.
+
+``` yaml
+---
+output:
+  word_document:
+    pandoc_args: ['--lua-filter=labelled-lists.lua']
+---
+```
+
+Usage
+-----
 
 ### Markdown syntax
 
@@ -326,3 +358,7 @@ And style it via the CSS (see "Css" global variable in the code).
 * If an item is only one block, it is either a Plain element (if it 
   only contains straightforward markdown) or a Para element (if it 
   contains some LaTeX code or equation) 
+
+[Pandoc]: https://www.pandoc.org/
+[Quarto]: https://www.quarto.org/
+[PandocMan]: https://www.pandoc.org/MANUAL.html

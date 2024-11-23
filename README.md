@@ -16,9 +16,16 @@ Maintained by [Julien Dutant][JDutant].
 Overview
 --------
 
-* Customize the bullet or label of unordered lists in [Quarto] and [Pandoc].
-* Crossreference specific list items by labels. 
-* Graceful breakdown in incompatible formats. In incompatible formats, the custom labelled is displayed after the item's bullet point. Lists are still encoded as undordered lists in the document's structure.
+* Customize the bullet or label of unordered lists in [Quarto] and
+  [Pandoc]. Use symbols, text, math; apply styles.
+* Crossreference specific list items using identifiers.
+  Crossreferences are automatically filled in with the item's label.
+* Good citizen. To maximize compatibility with other filters and 
+  output formats, labelled lists remain unordered lists in the 
+  document's Pandoc types tree.  
+* Graceful breakdown. The filter changes outputs in HTML and
+  LaTeX/PDF. In other formats, custom labelleds are displayed after
+  each item's bullet point.
 
 Example output
 --------------
@@ -46,6 +53,7 @@ Development funded by [Philosophie.ch][Philoch].
 [Philoch]: https://philosophie.ch
 [JDutant]: https://github.com/jdutant
 [Pandoc]: https://www.pandoc.org
+[PandocMan]: https://www.pandoc.org/MANUAL.html
 [Pandoc-crossref]: https://github.com/lierdakil/pandoc-crossref
 [Quarto]: https://quarto.org/
 
