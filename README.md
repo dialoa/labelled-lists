@@ -35,7 +35,7 @@ See [example output][LListsExample].
 Installation and usage
 ----------------------
 
-See the [manua][LListsManual].
+See the [manual][LListsManual].
 
 Issues and contributing
 ------------------------------------------------------------------
