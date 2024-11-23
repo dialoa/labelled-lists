@@ -176,10 +176,12 @@ quarto: $(FILTER_FILE) $(QUARTO_FILES)
 #
 # Website
 #
-# Website files are placed in the folder _site
+# Website files are placed in the folder `_site`
 # Setup on GitHub:
 #	- Build and deployment source: GitHub Actions
-#	- 
+#	- No need to configure Jekyll or Static. 
+# 	  A `.nojekyll` file is automatically added to `_site`.
+# Troubleshooting: you may need to update GitHub Actions versions.
 
 ## Generate website files in _site
 .PHONY: website
