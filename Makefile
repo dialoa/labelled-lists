@@ -176,10 +176,17 @@ quarto: $(FILTER_FILE) $(QUARTO_FILES)
 #
 # Website
 #
+# Website files are placed in the folder _site
+# Setup on GitHub:
+#	- Build and deployment source: GitHub Actions
+#	- 
 
 ## Generate website files in _site
 .PHONY: website
 website: _site/index.html _site/$(FILTER_FILE)
+	@if [ ! -f _site/.nojekyll ]; then \
+		touch _site/.nojekyll; \
+	fi
 
 _site/index.html: $(DOCS_SRC) $(TEST_FILES) $(FILTER_FILE) .tools/docs.lua \
 		_site/output.html _site/style.css
