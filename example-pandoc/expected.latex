@@ -1,0 +1,238 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Labelled lists examples},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Labelled lists examples}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{List labels and delimiters}\label{list-labels-and-delimiters}
+
+Default delimiter format set to ``\ldots)''.
+
+Labelled list
+
+\begin{itemize}
+\tightlist
+
+\item[Premise 1)] This is the first claim.
+
+\item[Premise 2)] This is the second claim.
+
+\item[Conclusion)] This is the conclusion.
+
+\end{itemize}
+
+Setting the delimiter for an individual list
+
+\begin{itemize}
+\tightlist
+
+\item[**Label 1**] This is the first item.
+
+\item[**Label 2**] This is the second item.
+
+\end{itemize}
+
+Empty list
+
+\begin{itemize}
+\tightlist
+
+\item[] This is the first item.
+
+\item[] This is the second item.
+
+\end{itemize}
+
+\section{Cross-referencing}\label{cross-referencing}
+
+Assigning identifiers to list items. Arbitrary markdown formatting on
+labels will be preserved in crossreferencing.
+
+\begin{itemize}
+\tightlist
+
+\item[\textbf{A1})]\phantomsection\label{A1ref}{} This is the first
+claim.
+
+\item[A2)]\phantomsection\label{A2ref}{} This is the second claim.
+
+\item[\emph{C})]\phantomsection\label{Cref}{} This is the conclusion.
+
+\end{itemize}
+
+Crossreferencing items with the citation syntax
+
+Normal citation (\hyperref[A1ref]{\textbf{A1}}). In-text reference, see
+\hyperref[A2ref]{A2}. Year-only citations are treated as normal ones
+(\hyperref[Cref]{\emph{C}}). Referencing several items
+(\hyperref[A1ref]{\textbf{A1}}; \hyperref[A2ref]{A2}).
+
+Crossreferencing items with links
+
+The claim \hyperref[A1ref]{\textbf{A1}} together with
+\hyperref[A2ref]{the next claim} entail (\hyperref[Cref]{\emph{C}}).
+
+\section{More examples and tests}\label{more-examples-and-tests}
+
+\subsection{Math formulas}\label{math-formulas}
+
+\begin{itemize}
+\tightlist
+
+\item[\(p_1\))] This list uses
+
+\item[\(p_2\))] math formulas as labels.
+
+\end{itemize}
+
+\subsection{LaTeX code}\label{latex-code}
+
+\begin{itemize}
+\tightlist
+
+\item[\textbf{a})] This list uses
+
+\item[\textbf{b})] latex code as labels.
+
+\end{itemize}
+
+Ignored: these are not treated as labels.
+
+\subsection{Small caps}\label{small-caps}
+
+\begin{itemize}
+\tightlist
+
+\item[\textsc{All})] This list uses
+
+\item[\textsc{Some})] latex code as labels.
+
+\end{itemize}
+
+\subsection{List with Para items}\label{list-with-para-items}
+
+\begin{itemize}
+\tightlist
+
+\item[A1)] \[F(x) > G(x)\]
+
+\item[A2)] \[G(x) > H(x)\]
+
+\end{itemize}
+
+\subsection{items with several blocks}\label{items-with-several-blocks}
+
+\begin{itemize}
+\tightlist
+
+\item[\textbf{B1})] This list's items
+
+consist of several blocks
+
+\[\sum_i Fi > \sum_i Gi\]
+
+\item[\textbf{B2})] Lorem ipsum dolor sit amet, consectetur adipiscing
+elit. Donec et massa ut eros volutpat gravida ut vel lacus. Proin turpis
+eros, imperdiet sed quam eget, bibendum aliquam massa. Phasellus
+pellentesque egestas dapibus. Proin porta tellus id orci consectetur
+bibendum. Nam eu cursus quam. Etiam vehicula in mi sed interdum. Duis
+rutrum eleifend consectetur. Phasellus ullamcorper, urna at vestibulum
+venenatis, tellus erat luctus nibh, eget hendrerit justo enim nec magna.
+Duis mollis ac felis ac tristique.
+
+Pellentesque malesuada arcu ac orci scelerisque vulputate. Aenean at ex
+suscipit, ultricies tellus sit amet, luctus lectus. Duis ut viverra
+sapien. Pellentesque habitant morbi tristique senectus et netus et
+malesuada fames ac turpis egestas. Cras consequat nisi at ex finibus, in
+condimentum erat auctor. In at nulla at est iaculis pulvinar sed id
+diam. Cras malesuada sit amet tellus id molestie.
+
+\end{itemize}
+
+\subsection{cross-reference with citation
+syntax}\label{cross-reference-with-citation-syntax}
+
+\begin{itemize}
+\tightlist
+
+\item[\textbf{B1})]\phantomsection\label{B1ref}{} This is the first
+claim.
+
+\item[B2)]\phantomsection\label{B2ref}{} This is the second claim.
+
+\item[\emph{D})]\phantomsection\label{Dref}{} This is the conclusion.
+
+\end{itemize}
+
+The claim \hyperref[B1ref]{\textbf{B1}} together with the claim
+\hyperref[B2ref]{B2} entail (\hyperref[Dref]{\emph{D}}).
+
+\subsection{cross-reference with internal link
+syntax}\label{cross-reference-with-internal-link-syntax}
+
+\begin{itemize}
+\tightlist
+
+\item[\textbf{C1})]\phantomsection\label{C1ref}{} This is the first
+claim.
+
+\item[C2)]\phantomsection\label{C2ref}{} This is the second claim.
+
+\item[\emph{E})]\phantomsection\label{Eref}{} This is the conclusion.
+
+\end{itemize}
+
+The claim \hyperref[C1ref]{\textbf{C1}} together with the claim
+\hyperref[C2ref]{C2} entail (\hyperref[Eref]{\emph{E}}).
+
+\end{document}

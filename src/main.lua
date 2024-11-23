@@ -2,9 +2,9 @@
  in Pandoc's markdown.
 
 @author Julien Dutant <julien.dutant@kcl.ac.uk>
-@copyright 2021 Julien Dutant
+@copyright 2021-2024 Julien Dutant
 @license MIT - see LICENSE file for details.
-@release 0.2
+@release 0.3
 
 @TODO style the HTML output
 @TODO in HTML, leave the BulletList element as is. 

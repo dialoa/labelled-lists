@@ -26,7 +26,7 @@ QUARTO_FILES := $(wildcard $(QUARTO_DIR)/*.qmd)
 # Docs
 # Source and defaults for docs version of Pandoc example output
 DOCS_SRC = docs/manual.md
-DOCS_DEFAULTS := $(TEST_DIR)/website_defaults.yaml
+DOCS_DEFAULTS := docs/website_defaults.yaml
 
 # Allow to use a different pandoc binary, e.g. when testing.
 PANDOC ?= pandoc
@@ -38,7 +38,7 @@ SED := sed $(shell sed v </dev/null >/dev/null 2>&1 && echo " --posix") -E
 # Pandoc formats for test outputs
 # Use make generate FORMAT=pdf to try PDF, 
 # not included in the test as PDF files aren't identical on each run
-FORMAT ?= html
+FORMAT ?= html latex
 
 # Directory containing the Quarto extension
 QUARTO_EXT_DIR = _extensions/$(FILTER_NAME)
@@ -72,18 +72,51 @@ help:
 # 
 # automatically triggered on `test` and `generate`
 
-## Build the filter file from sources (requires luacc)
-# If SOURCE_DIR is not empty, combine source files with
-# luacc and replace the filter file. 
+## Build the filter file. Uses luacc if the source dir contains multiple lua files. 
+#
 # ifeq is safer than ifdef (easier for the user to make
 # the variable empty than to make it undefined).
-ifneq ($(SOURCE_DIR), )
+ifeq ($(SOURCE_MODULES), )
+$(FILTER_FILE): $(SOURCE_FILES)
+	@if [ -f $(QUARTO_EXT_DIR)/$(FILTER_FILE) ]; then \
+		cp $(SOURCE_DIR)/$(SOURCE_MAIN).lua $(QUARTO_EXT_DIR)/$(FILTER_FILE); \
+		if [ ! -L $(FILTER_FILE) ]; then \
+			if [ -f $(FILTER_FILE) ]; then \
+				echo "WARNING: $(FILTER_FILE) is a file but should be a link to $(QUARTO_EXT_DIR)/$(FILTER_FILE)."; \
+				echo "Please make sure you edited the source $(SOURCE_DIR)/$(SOURCE_MAIN).lua"; \
+				read -p "Remove the file and replace with a link? (y/N) " REPLY; \
+				if [[ "$$REPLY" == "y" || "$$REPLY" == "y" ]]; then \
+					rm $(FILTER_FILE); \
+					ln -s $(QUARTO_EXT_DIR)/$(FILTER_FILE) $(FILTER_FILE); \
+				else \
+					echo "WARNING: $(FILTER_FILE) not up to date."; \
+				fi; \
+			else \
+				ln -s $(QUARTO_EXT_DIR)/$(FILTER_FILE) $(FILTER_FILE); \
+			fi; \
+		fi; \
+	else \
+		cp $(SOURCE_DIR)/$(SOURCE_MAIN).lua $(QUARTO_EXT_DIR)/$(FILTER_FILE); \
+	fi
+else
 $(FILTER_FILE): _check_luacc $(SOURCE_FILES)
 	@if [ -f $(QUARTO_EXT_DIR)/$(FILTER_FILE) ]; then \
 		luacc -o $(QUARTO_EXT_DIR)/$(FILTER_FILE) -i $(SOURCE_DIR) \
 			$(SOURCE_DIR)/$(SOURCE_MAIN) $(SOURCE_MODULES); \
 		if [ ! -L $(FILTER_FILE) ]; then \
-		    ln -s $(QUARTO_EXT_DIR)/$(FILTER_FILE) $(FILTER_FILE); \
+			if [ -f $(FILTER_FILE) ]; then \
+				echo "WARNING: $(FILTER_FILE) is a file but should be a link to $(QUARTO_EXT_DIR)/$(FILTER_FILE)."; \
+				echo "Please make sure you edited the source $(SOURCE_DIR)/$(SOURCE_MAIN).lua"; \
+				read -p "Remove the file and replace with a link? (y/N) " REPLY; \
+				if [[ "$$REPLY" == "y" || "$$REPLY" == "y" ]]; then \
+					rm $(FILTER_FILE); \
+					ln -s $(QUARTO_EXT_DIR)/$(FILTER_FILE) $(FILTER_FILE); \
+				else \
+					echo "WARNING: $(FILTER_FILE) not up to date."; \
+				fi; \
+			else \
+				ln -s $(QUARTO_EXT_DIR)/$(FILTER_FILE) $(FILTER_FILE); \
+			fi; \
 		fi; \
 	else \
 		luacc -o $(FILTER_FILE) -i $(SOURCE_DIR) \
@@ -119,7 +152,7 @@ test: $(FILTER_FILE) $(TEST_FILES)
 		rm $(TEST_DIR)/out.$$ext; \
 	done
 
-## Generate the expected output
+## Generate the expected output for Pandoc
 # This target **must not** be a dependency of the `test` target, as that
 # would cause it to be regenerated on each run, making the test
 # pointless.
@@ -154,6 +187,7 @@ _site/index.html: $(DOCS_SRC) $(TEST_FILES) $(FILTER_FILE) .tools/docs.lua \
 	$(PANDOC) \
 	    --standalone \
 	    --lua-filter=.tools/docs.lua \
+		--lua-filter=$(FILTER_FILE) \
 	    --metadata=sample-file:$(TEST_SRC) \
 	    --metadata=result-file:_site/output.html \
 	    --metadata=code-file:$(FILTER_FILE) \
@@ -255,8 +289,8 @@ setup: update-name
 clean:
 	rm -rf _site/*
 	rm -rf $(TEST_DIR)/expected.*
-	rm -rf _imagify_files
 	rm -f $(QUARTO_DIR)/example.html
+	rm -f $(QUARTO_DIR)/example.tex
+	rm -f $(QUARTO_DIR)/example.pdf
 	rm -rf $(QUARTO_DIR)/example_files
-	rm -rf $(QUARTO_DIR)/_imagify_files
 

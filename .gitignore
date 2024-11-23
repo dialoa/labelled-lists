@@ -1,6 +1,11 @@
-*.html
-*.pdf
-*_files/
+# Docs output
+/_site/
+
+# Quarto artefacts
+/example-quarto/*_files/
+/example-quarto/*.html
+/example-quarto/*.pdf
+/example-quarto/*.tex
 /.luarc.json
 
 # MacOS

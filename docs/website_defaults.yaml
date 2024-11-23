@@ -1,0 +1,11 @@
+# Pandoc defaults for generating docs output
+
+verbosity: ERROR
+input-files:
+- example-pandoc/example.md
+standalone: true
+filters:
+  - {type: lua, path: labelled-lists.lua}
+# Metadata must be provided in a separate file to be parsed
+# as Markdown <https://pandoc.org/MANUAL.html#reader-options-1>
+#metadata-file: ${.}/website_meta.yaml

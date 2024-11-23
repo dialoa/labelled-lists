@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Labelled lists examples</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Labelled lists examples</h1>
+</header>
+<h1 id="list-labels-and-delimiters">List labels and delimiters</h1>
+<p>Default delimiter format set to “…)”.</p>
+<p>Labelled list</p>
+<div class="labelled-lists-list">
+<p class="labelled-lists-item"><span
+class="labelled-lists-label">Premise 1)</span> This is the first
+claim.</p>
+<p class="labelled-lists-item"><span
+class="labelled-lists-label">Premise 2)</span> This is the second
+claim.</p>
+<p class="labelled-lists-item"><span
+class="labelled-lists-label">Conclusion)</span> This is the
+conclusion.</p>
+</div>
+<p>Setting the delimiter for an individual list</p>
+<div class="labelled-lists-list">
+<p class="labelled-lists-item"><span
+class="labelled-lists-label">**Label 1**</span> This is the first
+item.</p>
+<p class="labelled-lists-item"><span
+class="labelled-lists-label">**Label 2**</span> This is the second
+item.</p>
+</div>
+<p>Empty list</p>
+<div class="labelled-lists-list">
+<p class="labelled-lists-item"><span
+class="labelled-lists-label"></span> This is the first item.</p>
+<p class="labelled-lists-item"><span
+class="labelled-lists-label"></span> This is the second item.</p>
+</div>
+<h1 id="cross-referencing">Cross-referencing</h1>
+<p>Assigning identifiers to list items. Arbitrary markdown formatting on
+labels will be preserved in crossreferencing.</p>
+<div class="labelled-lists-list">
+<p class="labelled-lists-item"><span id="A1ref"
+class="labelled-lists-label"><strong>A1</strong>)</span> This is the
+first claim.</p>
+<p class="labelled-lists-item"><span id="A2ref"
+class="labelled-lists-label">A2)</span> This is the second claim.</p>
+<p class="labelled-lists-item"><span id="Cref"
+class="labelled-lists-label"><em>C</em>)</span> This is the
+conclusion.</p>
+</div>
+<p>Crossreferencing items with the citation syntax</p>
+<p>Normal citation (<a href="#A1ref"><strong>A1</strong></a>). In-text
+reference, see <a href="#A2ref">A2</a>. Year-only citations are treated
+as normal ones (<a href="#Cref"><em>C</em></a>). Referencing several
+items (<a href="#A1ref"><strong>A1</strong></a>; <a
+href="#A2ref">A2</a>).</p>
+<p>Crossreferencing items with links</p>
+<p>The claim <a href="#A1ref"><strong>A1</strong></a> together with <a
+href="#A2ref">the next claim</a> entail (<a
+href="#Cref"><em>C</em></a>).</p>
+<h1 id="more-examples-and-tests">More examples and tests</h1>
+<h2 id="math-formulas">Math formulas</h2>
+<div class="labelled-lists-list">
+<p class="labelled-lists-item"><span class="labelled-lists-label"><span
+class="math inline"><em>p</em><sub>1</sub></span>)</span> This list
+uses</p>
+<p class="labelled-lists-item"><span class="labelled-lists-label"><span
+class="math inline"><em>p</em><sub>2</sub></span>)</span> math formulas
+as labels.</p>
+</div>
+<h2 id="latex-code">LaTeX code</h2>
+<div class="labelled-lists-list">
+<p class="labelled-lists-item"><span
+class="labelled-lists-label">)</span> This list uses</p>
+<p class="labelled-lists-item"><span
+class="labelled-lists-label">)</span> latex code as labels.</p>
+</div>
+<p>Ignored: these are not treated as labels.</p>
+<h2 id="small-caps">Small caps</h2>
+<div class="labelled-lists-list">
+<p class="labelled-lists-item"><span class="labelled-lists-label"><span
+class="smallcaps">All</span>)</span> This list uses</p>
+<p class="labelled-lists-item"><span class="labelled-lists-label"><span
+class="smallcaps">Some</span>)</span> latex code as labels.</p>
+</div>
+<h2 id="list-with-para-items">List with Para items</h2>
+<div class="labelled-lists-list">
+<p class="labelled-lists-item"><span
+class="labelled-lists-label">A1)</span> <span
+class="math display"><em>F</em>(<em>x</em>) &gt; <em>G</em>(<em>x</em>)</span></p>
+<p class="labelled-lists-item"><span
+class="labelled-lists-label">A2)</span> <span
+class="math display"><em>G</em>(<em>x</em>) &gt; <em>H</em>(<em>x</em>)</span></p>
+</div>
+<h2 id="items-with-several-blocks">items with several blocks</h2>
+<div class="labelled-lists-list">
+<div class="labelled-lists-item">
+<p><span class="labelled-lists-label"><strong>B1</strong>)</span> This
+list’s items</p>
+<p>consist of several blocks</p>
+<p><span
+class="math display">∑<sub><em>i</em></sub><em>F</em><em>i</em> &gt; ∑<sub><em>i</em></sub><em>G</em><em>i</em></span></p>
+</div>
+<div class="labelled-lists-item">
+<p><span class="labelled-lists-label"><strong>B2</strong>)</span> Lorem
+ipsum dolor sit amet, consectetur adipiscing elit. Donec et massa ut
+eros volutpat gravida ut vel lacus. Proin turpis eros, imperdiet sed
+quam eget, bibendum aliquam massa. Phasellus pellentesque egestas
+dapibus. Proin porta tellus id orci consectetur bibendum. Nam eu cursus
+quam. Etiam vehicula in mi sed interdum. Duis rutrum eleifend
+consectetur. Phasellus ullamcorper, urna at vestibulum venenatis, tellus
+erat luctus nibh, eget hendrerit justo enim nec magna. Duis mollis ac
+felis ac tristique.</p>
+<p>Pellentesque malesuada arcu ac orci scelerisque vulputate. Aenean at
+ex suscipit, ultricies tellus sit amet, luctus lectus. Duis ut viverra
+sapien. Pellentesque habitant morbi tristique senectus et netus et
+malesuada fames ac turpis egestas. Cras consequat nisi at ex finibus, in
+condimentum erat auctor. In at nulla at est iaculis pulvinar sed id
+diam. Cras malesuada sit amet tellus id molestie.</p>
+</div>
+</div>
+<h2 id="cross-reference-with-citation-syntax">cross-reference with
+citation syntax</h2>
+<div class="labelled-lists-list">
+<p class="labelled-lists-item"><span id="B1ref"
+class="labelled-lists-label"><strong>B1</strong>)</span> This is the
+first claim.</p>
+<p class="labelled-lists-item"><span id="B2ref"
+class="labelled-lists-label">B2)</span> This is the second claim.</p>
+<p class="labelled-lists-item"><span id="Dref"
+class="labelled-lists-label"><em>D</em>)</span> This is the
+conclusion.</p>
+</div>
+<p>The claim <a href="#B1ref"><strong>B1</strong></a> together with the
+claim <a href="#B2ref">B2</a> entail (<a
+href="#Dref"><em>D</em></a>).</p>
+<h2 id="cross-reference-with-internal-link-syntax">cross-reference with
+internal link syntax</h2>
+<div class="labelled-lists-list">
+<p class="labelled-lists-item"><span id="C1ref"
+class="labelled-lists-label"><strong>C1</strong>)</span> This is the
+first claim.</p>
+<p class="labelled-lists-item"><span id="C2ref"
+class="labelled-lists-label">C2)</span> This is the second claim.</p>
+<p class="labelled-lists-item"><span id="Eref"
+class="labelled-lists-label"><em>E</em>)</span> This is the
+conclusion.</p>
+</div>
+<p>The claim <a href="#C1ref"><strong>C1</strong></a> together with the
+claim <a href="#C2ref">C2</a> entail (<a
+href="#Eref"><em>E</em></a>).</p>
+</body>
+</html>
