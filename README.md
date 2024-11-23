@@ -1,4 +1,4 @@
-Labelled lists Extension For Quarto
+Labelled lists in Pandoc and Quarto
 ===================================
 
 [![GitHub build status][CI badge]][CI workflow]
