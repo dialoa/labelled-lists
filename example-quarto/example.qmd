@@ -3,10 +3,8 @@ title: Labelled lists examples
 filters:
 - ../labelled-lists.lua
 format:
-    html:
-        number-sections: false
-    latex:
-        number-sections: false
+    html: default
+    latex: default
 labelled-lists:
   delimiter: )
   disable-citations: false

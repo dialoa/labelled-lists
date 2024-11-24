@@ -1,7 +1,7 @@
----
-title: "Labelled lists filter for Pandoc and Quarto"
-author: Julien Dutant
----
+Labelled lists in Pandoc and Quarto
+===================================
+
+Filter to create labelled lists in Pandoc and Quarto. 
 
 Introduction
 ------------
@@ -9,7 +9,11 @@ Introduction
 This filter provides custom labelled lists in Pandoc's markdown for
 outputs in LaTeX/PDF, HTML and JATS XML. Instead of bullets or
 numbers, list items are given custom text labels. The text labels can
-include markdown formatting. 
+include markdown formatting.
+
+View the [filter source on GitHub][GHsrc].
+
+[GHsrc]: https://github.com/dialoa/labelled-lists
 
 Installation
 ------------

@@ -17,7 +17,7 @@ SOURCE_MAIN = main
 # Pandoc example file
 TEST_DIR := example-pandoc
 TEST_SRC := $(TEST_DIR)/example.md
-TEST_DEFAULTS := $(TEST_DIR)/example_defaults.yaml
+TEST_DEFAULTS := $(TEST_DIR)/defaults_test.yaml
 
 # Quarto test dir
 QUARTO_DIR := example-quarto
@@ -26,7 +26,7 @@ QUARTO_FILES := $(wildcard $(QUARTO_DIR)/*.qmd)
 # Docs
 # Source and defaults for docs version of Pandoc example output
 DOCS_SRC = docs/manual.md
-DOCS_DEFAULTS := docs/website_defaults.yaml
+DOCS_DEFAULTS := example-pandoc/defaults_man.yaml
 
 # Allow to use a different pandoc binary, e.g. when testing.
 PANDOC ?= pandoc

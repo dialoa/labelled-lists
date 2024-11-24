@@ -17,8 +17,8 @@ on:
   # This way we will catch incompatible pandoc changes in a timely
   # manner.
   schedule:
-    # At 5:39am each Tuesday
-    - cron: '39 5 * * 2'
+    # At 4:17am each Thursday
+    - cron: '17 4 * * 4'
 
 jobs:
   test:

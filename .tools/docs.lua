@@ -1,3 +1,10 @@
+--[[ docs.lua: Generate Lua filter documentation
+
+Changes from upstream:
+- check whether a title exist before using the first 
+  level 1 header as title.
+
+---]]
 local path = require 'pandoc.path'
 local utils = require 'pandoc.utils'
 local stringify = utils.stringify
@@ -80,16 +87,17 @@ function Pandoc (doc)
   local meta = doc.meta
   local blocks = doc.blocks
 
-  -- Set document title from README title. There should usually be just
-  -- a single level 1 heading.
-  blocks = blocks:walk{
-    Header = function (h)
-      if h.level == 1 then
-        meta.title = h.content
-        return {}
+  -- If no title, use the first level 1 heading as title.
+  if not meta.title then
+    blocks = blocks:walk{
+      Header = function (h)
+        if h.level == 1 then
+          meta.title = h.content
+          return {}
+        end
       end
-    end
-  }
+    }
+  end
 
   -- Add the sample file as an example.
   blocks:extend{pandoc.Header(2, 'Example', pandoc.Attr('Example'))}
