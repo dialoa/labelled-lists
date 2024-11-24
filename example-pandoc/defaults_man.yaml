@@ -1,7 +1,9 @@
+#
 # Pandoc defaults for example output embedded in the docs
+#
 verbosity: ERROR
 input-files:
-- example-pandoc/example.md
+- ${.}/example.md
 standalone: true
 filters:
   - {type: lua, path: labelled-lists.lua}

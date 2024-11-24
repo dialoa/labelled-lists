@@ -1,5 +1,6 @@
-# Test defaults
-
+#
+# Pandoc defaults to be used for `make test`
+#
 verbosity: ERROR
 input-files:
 - ${.}/example.md
