@@ -44,6 +44,9 @@ filters:
 ---
 ```
 
+See [Quarto's Extensions guide][QuartoExtManagement] for more
+details on updating and version-controlling filters.
+
 ### R Markdown
 
 Use `pandoc_args` to invoke the filter. See the [R Markdown
@@ -376,4 +379,5 @@ And style it via the CSS (see "Css" global variable in the code).
 
 [Pandoc]: https://www.pandoc.org/
 [Quarto]: https://www.quarto.org/
+[QuartoExtManagement]: https://quarto.org/docs/extensions/managing.html
 [PandocMan]: https://www.pandoc.org/MANUAL.html
