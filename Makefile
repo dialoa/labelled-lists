@@ -190,10 +190,8 @@ website: _site/index.html _site/$(FILTER_FILE)
 		touch _site/.nojekyll; \
 	fi
 
-FORCE:
-
 _site/index.html: $(DOCS_SRC) $(TEST_FILES) $(FILTER_FILE) .tools/docs.lua \
-		_site/output.html _site/style.css FORCE
+		_site/output.html _site/style.css
 	@mkdir -p _site
 	@cp .tools/anchorlinks.js _site
 	$(PANDOC) \
