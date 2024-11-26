@@ -1,15 +1,15 @@
 Labelled lists in Pandoc and Quarto
 ===================================
 
-Filter to create labelled lists in Pandoc and Quarto. 
+Filter to create labelled lists in Pandoc and Quarto.
 
 Introduction
 ------------
 
-This filter provides custom labelled lists in Pandoc's markdown for
-outputs in LaTeX/PDF, HTML and JATS XML. Instead of bullets or
-numbers, list items are given custom text labels. The text labels can
-include markdown formatting.
+This filter provides custom labelled lists in Pandoc's markdown
+for outputs in LaTeX/PDF, HTML and JATS XML. Instead of bullets or
+numbers, list items are given custom text labels. The text labels
+can include markdown formatting.
 
 View the [filter source on GitHub][GHsrc].
 
@@ -20,8 +20,8 @@ Installation
 
 ### Plain pandoc
 
-Get `labelled-lists.lua` from the Releases page and save it somewhere
-Pandoc can find (see [PandocMan] for details).
+Get `labelled-lists.lua` from the Releases page and save it
+somewhere Pandoc can find (see [PandocMan] for details).
 
 Pass the filter to Pandoc via the `--lua-filter` (or `-L`) command
 line option.
@@ -71,8 +71,8 @@ A simple illustration of the custom label syntax:
 * [Conclusion]{} This is the conclusion.
 ```
 
-This generates the following list (process this file with the filter
-to see the result):
+This generates the following list (process this file with the
+filter to see the result):
 
 * [Premise 1]{} This is the first claim.
 * [Premise 2]{} This is the second claim.
@@ -84,24 +84,27 @@ element*.
 
 * A Span element is inline text (i.e., not block like a paragraph)
   that optinally has some attributes. The default syntax is `
-  [inline text]{attributes}`. Inline text will be used as label, 
+  [inline text]{attributes}`. Inline text will be used as label,
   placed within round bracket. 
 * There is no need to specify attributes on the Span. But curly
-  brackets must be present: `[label]` won't work, `[label]{}` will.
-* The label can include formatting. `[**T1**]{}` will generate a label with
-  strong emphasis (bold by default).
-* Label Spans can be empty. Thus `[]{}` will work, though it will be
-  typeset as `()` unless you change the list delimiters to 'none'.
-* Numbers, unicode characters, maths formulas can be used as Spans.
-* Span elements can also be entered using HTML syntax: `<span>inline text
-  </span>`. See [Pandoc manual]
+  brackets must be present: `[label]` won't work, `[label]{}`
+  will.
+* The label can include formatting. `[**T1**]{}` will generate a
+  label with strong emphasis (bold by default).
+* Label Spans can be empty. Thus `[]{}` will work, though it will
+  be typeset as `()` unless you change the list delimiters to
+  'none'.
+* Numbers, unicode characters, maths formulas can be used as
+  Spans.
+* Span elements can also be entered using HTML syntax:
+  `<span>inline text </span>`. See [Pandoc manual]
   (https://pandoc.org/MANUAL.html#divs-and-spans) for details. 
 
 ### Customizing the label delimiters
 
-By default the custom lable is put between two parentheses. You can change
-this globally by setting a `delimiter` key within a `labelled-lists` key in 
-your document's metadata.
+By default the custom lable is put between two parentheses. You
+can change this globally by setting a `delimiter` key within a
+`labelled-lists` key in your document's metadata.
 
 ```yaml
 labelled-lists:
@@ -114,14 +117,14 @@ Possible values:
 * `()` or `(` or `TwoParens` for "(Label)" (default)
 * `.` or `Period` for a dot "Label."
 * `)` or `OneParen` for "Label)"
-* `...%1...` for arbitrary delimiters, e.g. `|%1|` for "|Label|", "%1--" for  
-  `Label--` and so on. These characters are interpreted literally, not 
-  as markdown: `*%1*` will surround your label with asterisks, not make
-  it italic.
+* `...%1...` for arbitrary delimiters, e.g. `|%1|` for "|Label|",
+  "%1--" for  `Label--` and so on. These characters are
+  interpreted literally, not as markdown: `*%1*` will surround
+  your label with asterisks, not make it italic.
 
-This can be set for a specific list by using a `delimiter` 
-attribute on the first
-span element of your list (same possible values as above):
+This can be set for a specific list by using a `delimiter`
+attribute on the first span element of your list (same possible
+values as above):
 
 ```markdown
 * [Premise 1]{delimiter='**%1**'} This is the first claim.
@@ -146,58 +149,61 @@ Custom labels can be given internal identifiers. The syntax is
 * [*C*]{#Cref} This is the conclusion.
 ```
 
-Note that `#` is not part of the identifier. Identifiers should start 
-with a letter and contain only letters, digits, colons `:`, dots `.`,
-dashes `-` and underscores `_`. 
+Note that `#` is not part of the identifier. Identifiers should
+start with a letter and contain only letters, digits, colons `:`,
+dots `.`, dashes `-` and underscores `_`. 
 
-Labels with identifiers can be crossreferenced using 
-Pandoc's citations or internal links.
+Labels with identifiers can be crossreferenced using Pandoc's
+citations or internal links.
 
 #### Cross-referencing with citations
 
 The basic syntax is:
 
-* Normal reference: `[@A1ref]`. Outputs the label with its formatting, 
-  in parentheses: [@A1ref]. A prefix and suffix can be specified too:
-  `[remember @A1ref and sqq.]` will output [remember @A1ref and sqq.].
-* In-text reference: `@A1ref`. Outputs the label with its formatting: @A1ref.
-* Note that the suppressed author style, `[-@A1ref]`, will be processed 
-  as normal reference: [-@A1ref].
+* Normal reference: `[@A1ref]`. Outputs the label with its
+  formatting, in parentheses: [@A1ref]. A prefix and suffix can be
+  specified too: `[remember @A1ref and sqq.]` will output
+  [remember @A1ref and sqq.].
+* In-text reference: `@A1ref`. Outputs the label with its
+  formatting: @A1ref.
+* Note that the suppressed author style, `[-@A1ref]`, will be
+  processed as normal reference: [-@A1ref].
 
-You can crossrefer to several custom labels at a time: 
-`[@A1ref; @A2ref]`. But mixing references to a custom label
-with bibliographic ones in a same citation won't work: if
-`Smith2003` is a key in your bibliography `[@A1ref; Smith2003]`
-will only output "(@A1ref; Smith, 2003)".
+You can crossrefer to several custom labels at a time: `[@A1ref;
+@A2ref]`. But mixing references to a custom label with
+bibliographic ones in a same citation won't work: if `Smith2003`
+is a key in your bibliography `[@A1ref; Smith2003]` will only
+output "(@A1ref; Smith, 2003)".
 
-Because this syntax overlaps with Pandoc's citation syntax, conflicts
-should be avoided:
+Because this syntax overlaps with Pandoc's citation syntax,
+conflicts should be avoided:
 
-* Avoid giving the same identifier (e.g. `Smith2005`) to 
-  a custom label item and a bibliographic entry. If that happens,
-  the citation will be interpreted as crossreference to the custom
-  label item. To make sure you you may use identifiers starting 
+* Avoid giving the same identifier (e.g. `Smith2005`) to a custom
+  label item and a bibliographic entry. If that happens, the
+  citation will be interpreted as crossreference to the custom
+  label item. To make sure you you may use identifiers starting
   with `item:`: `item:A1ref`, `item:A2ref`, or some other prefix.
-* The filter should preferably be run before `citeproc`, and 
-  before other filters that use citations (like `pandoc-crossref`). 
-  It may work properly even if it is run after, though `citeproc` 
-  will issue "citations not found" warnings. To ensure that
-  the filter is run before, just place it before in the 
-  command line or in your YAML options file's `filters` field.
+* The filter should preferably be run before `citeproc`, and
+  before other filters that use citations (like
+  `pandoc-crossref`). It may work properly even if it is run
+  after, though `citeproc` will issue "citations not found"
+  warnings. To ensure that the filter is run before, just place it
+  before in the command line or in your YAML options file's
+  `filters` field.
 
-Alternatively, the citation syntax for crossreferencing 
-custom label items can be deactivated. 
-See [Customization] below. 
+Alternatively, the citation syntax for crossreferencing custom
+label items can be deactivated. See [Customization] below. 
 
 #### Cross-referencing with internal links
 
-In Pandoc markdown internal links are created with the syntax `[link 
-text](#target_identifier)`. (Note the rounded brackets instead of
-curly ones for Span element identifiers.) You can use internal
-links to cross-refer to custom label items that have a identifier.
-If your link has no text, the label with its formatting will be
-printed out; otherwise whichever text you give for the link. 
-For instance, given the custom label list above, the following:
+In Pandoc markdown internal links are created with the syntax
+`[link text](#target_identifier)`. (Note the rounded brackets
+instead of curly ones for Span element identifiers.) You can use
+internal links to cross-refer to custom label items that have a
+identifier. If your link has no text, the label with its
+formatting will be printed out; otherwise whichever text you give
+for the link. For instance, given the custom label list above, the
+following:
 
 ```markdown
 The claim [](#A1ref) together with [the next claim](#A2ref) 
@@ -212,8 +218,8 @@ where the links point to the corresponding items in the list.
 
 ### Customization
 
-Filter options can be specified in the document's metadata (YAML block)
-as follows:
+Filter options can be specified in the document's metadata (YAML
+block) as follows:
 
 ```markdown
 ---
@@ -224,11 +230,11 @@ labelled-lists:
   delimiter: Period
 ```
 
-That is the metadata field `labelled-lists` contains the filter options as
-a map. Presently the filter has just one option:
+That is the metadata field `labelled-lists` contains the filter
+options as a map. Presently the filter has just one option:
 
-* `disable-citations`: if true, the filter will not process cross-references
-  made with the citation syntax. (default: false)
+* `disable-citations`: if true, the filter will not process
+  cross-references made with the citation syntax. (default: false)
 
 Examples and tests
 ------------------
@@ -262,19 +268,23 @@ Ignored: these are not treated as labels.
 
     $$\sum_i Fi > \sum_i Gi$$
 
-* [**B2**]{} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et
-  massa ut eros volutpat gravida ut vel lacus. Proin turpis eros, imperdiet sed
-  quam eget, bibendum aliquam massa. Phasellus pellentesque egestas dapibus.
-  Proin porta tellus id orci consectetur bibendum. Nam eu cursus quam. Etiam
-  vehicula in mi sed interdum. Duis rutrum eleifend consectetur. Phasellus
-  ullamcorper, urna at vestibulum venenatis, tellus erat luctus nibh, eget
-  hendrerit justo enim nec magna. Duis mollis ac felis ac tristique.
+* [**B2**]{} Lorem ipsum dolor sit amet, consectetur adipiscing
+  elit. Donec et massa ut eros volutpat gravida ut vel lacus.
+  Proin turpis eros, imperdiet sed quam eget, bibendum aliquam
+  massa. Phasellus pellentesque egestas dapibus. Proin porta
+  tellus id orci consectetur bibendum. Nam eu cursus quam. Etiam
+  vehicula in mi sed interdum. Duis rutrum eleifend consectetur.
+  Phasellus ullamcorper, urna at vestibulum venenatis, tellus erat
+  luctus nibh, eget hendrerit justo enim nec magna. Duis mollis ac
+  felis ac tristique.
 
-  Pellentesque malesuada arcu ac orci scelerisque vulputate. Aenean at ex
-  suscipit, ultricies tellus sit amet, luctus lectus. Duis ut viverra sapien.
-  Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
-  turpis egestas. Cras consequat nisi at ex finibus, in condimentum erat auctor.
-  In at nulla at est iaculis pulvinar sed id diam. Cras malesuada sit amet tellus id molestie.
+  Pellentesque malesuada arcu ac orci scelerisque vulputate.
+  Aenean at ex suscipit, ultricies tellus sit amet, luctus lectus.
+  Duis ut viverra sapien. Pellentesque habitant morbi tristique
+  senectus et netus et malesuada fames ac turpis egestas. Cras
+  consequat nisi at ex finibus, in condimentum erat auctor. In at
+  nulla at est iaculis pulvinar sed id diam. Cras malesuada sit
+  amet tellus id molestie.
 
 ### cross-reference with citation syntax
 
@@ -316,9 +326,9 @@ Details
 
 HTML output is placed in a `<div>`. 
 
-
-*Currently, the list is recreated as a set of paragraphs*. Each item is a `<p>` if it's one block long,
-  a `<div>` if longer. The label itself is contained in a `<span>`. 
+*Currently, the list is recreated as a set of paragraphs*. Each
+  item is a `<p>` if it's one block long, a `<div>` if longer. The
+  label itself is contained in a `<span>`. 
 
 ```html
 <div class="labelled-lists-list">
@@ -350,18 +360,19 @@ And style it via the CSS (see "Css" global variable in the code).
 
 ### List structures
 
-* In the Pandoc AST, each item is a list of blocks. If the item has 
- only one block, the list will contain only one element. 
-* If an item has only one block, that block's type can be at least:
+* In the Pandoc AST, each item is a list of blocks. If the item
+ has only one block, the list will contain only one element. 
+* If an item has only one block, that block's type can be at
+  least:
   - Plain, if it only contains straightforward markdown
-  - Para, if it contains some equation LaTeX code (and perhaps in other
-   cases too)
+  - Para, if it contains some equation LaTeX code (and perhaps in
+   other cases too)
   - Table if it contains a table. 
-* It an item has several blocks, they will be Para by default, 
+* It an item has several blocks, they will be Para by default,
   otherwise of whatever type the block is. 
-* If an item is only one block, it is either a Plain element (if it 
-  only contains straightforward markdown) or a Para element (if it 
-  contains some LaTeX code or equation) 
+* If an item is only one block, it is either a Plain element (if
+  it only contains straightforward markdown) or a Para element (if
+  it contains some LaTeX code or equation) 
 
 [Pandoc]: https://www.pandoc.org/
 [Quarto]: https://www.quarto.org/
