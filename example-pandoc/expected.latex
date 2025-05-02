@@ -63,11 +63,17 @@ Labelled list
 \begin{itemize}
 \tightlist
 
-\item[Premise 1)] This is the first claim.
+\item[Premise 1)] This is the first claim. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+et dolore magna aliqua.
 
-\item[Premise 2)] This is the second claim.
+\item[Premise 2)] This is the second claim. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat.
 
-\item[Conclusion)] This is the conclusion.
+\item[Conclusion)] This is the conclusion. Duis aute irure dolor in
+reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+pariatur.
 
 \end{itemize}
 
@@ -76,9 +82,13 @@ Setting the delimiter for an individual list
 \begin{itemize}
 \tightlist
 
-\item[**Label 1**] This is the first item.
+\item[**Label 1**] This is the first item. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+et dolore magna aliqua.
 
-\item[**Label 2**] This is the second item.
+\item[**Label 2**] This is the second item. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat.
 
 \end{itemize}
 
@@ -87,9 +97,12 @@ Empty list
 \begin{itemize}
 \tightlist
 
-\item[] This is the first item.
+\item[] This is the first item. Lorem ipsum dolor sit amet, consectetur
+adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+magna aliqua.
 
-\item[] This is the second item.
+\item[] This is the second item. Ut enim ad minim veniam, quis nostrud
+exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 \end{itemize}
 
@@ -101,12 +114,14 @@ labels will be preserved in crossreferencing.
 \begin{itemize}
 \tightlist
 
-\item[\textbf{A1})]\phantomsection\label{A1ref}{} This is the first
+\item[\textbf{A1})]\protect\phantomsection\label{A1ref}{} This is the
+first claim.
+
+\item[A2)]\protect\phantomsection\label{A2ref}{} This is the second
 claim.
 
-\item[A2)]\phantomsection\label{A2ref}{} This is the second claim.
-
-\item[\emph{C})]\phantomsection\label{Cref}{} This is the conclusion.
+\item[\emph{C})]\protect\phantomsection\label{Cref}{} This is the
+conclusion.
 
 \end{itemize}
 
@@ -205,12 +220,14 @@ syntax}\label{cross-reference-with-citation-syntax}
 \begin{itemize}
 \tightlist
 
-\item[\textbf{B1})]\phantomsection\label{B1ref}{} This is the first
+\item[\textbf{B1})]\protect\phantomsection\label{B1ref}{} This is the
+first claim.
+
+\item[B2)]\protect\phantomsection\label{B2ref}{} This is the second
 claim.
 
-\item[B2)]\phantomsection\label{B2ref}{} This is the second claim.
-
-\item[\emph{D})]\phantomsection\label{Dref}{} This is the conclusion.
+\item[\emph{D})]\protect\phantomsection\label{Dref}{} This is the
+conclusion.
 
 \end{itemize}
 
@@ -223,12 +240,14 @@ syntax}\label{cross-reference-with-internal-link-syntax}
 \begin{itemize}
 \tightlist
 
-\item[\textbf{C1})]\phantomsection\label{C1ref}{} This is the first
+\item[\textbf{C1})]\protect\phantomsection\label{C1ref}{} This is the
+first claim.
+
+\item[C2)]\protect\phantomsection\label{C2ref}{} This is the second
 claim.
 
-\item[C2)]\phantomsection\label{C2ref}{} This is the second claim.
-
-\item[\emph{E})]\phantomsection\label{Eref}{} This is the conclusion.
+\item[\emph{E})]\protect\phantomsection\label{Eref}{} This is the
+conclusion.
 
 \end{itemize}
 

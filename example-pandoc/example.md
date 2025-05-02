@@ -11,19 +11,19 @@ Default delimiter format set to  "...)".
 
 Labelled list
 
-* [Premise 1]{} This is the first claim.
-* [Premise 2]{} This is the second claim.
-* [Conclusion]{} This is the conclusion.
+* [Premise 1]{} This is the first claim. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+* [Premise 2]{} This is the second claim. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+* [Conclusion]{} This is the conclusion. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
 
 Setting the delimiter for an individual list
 
-* [Label 1]{delimiter='**%1**'} This is the first item.
-* [Label 2]{} This is the second item.
+* [Label 1]{delimiter='**%1**'} This is the first item. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+* [Label 2]{} This is the second item. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 Empty list
 
-* []{delimiter=''} This is the first item.
-* []{} This is the second item.
+* []{delimiter=''} This is the first item. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+* []{} This is the second item. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 # Cross-referencing
 
