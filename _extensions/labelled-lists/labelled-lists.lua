@@ -3,7 +3,7 @@
 @author Julien Dutant <julien.dutant@kcl.ac.uk>
 @copyright 2021-2024 Julien Dutant
 @license MIT - see LICENSE file for details.
-@release 0.4.1
+@release 0.4.2
 
 @TODO style the HTML output
 @TODO in HTML, leave the BulletList element as is. 
@@ -352,9 +352,13 @@ function build_list(element)
                     pandoc.Div(blocks)
                 })
 
+                local margin = options.text_base_direction == 'ltr'
+                and 'margin-left:auto;' or 'margin-right:auto;'
+
                 side_inlines:insert(1,
                     pandoc.RawInline('html', '<p'
                     ..' class="'..html_classes['side']..'"'
+                    ..' style="'..margin..'"'
                     ..'>'
                 )) 
                 side_inlines:insert(
