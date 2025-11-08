@@ -219,6 +219,38 @@ will output:
 
 where the links point to the corresponding items in the list. 
 
+### Adding am opposite side comment
+
+You can add a side comment to any item, e.g. a citation, crossreference, longer label. This is done by placing a Span
+element with class `side`:
+
+* [MP]{} If it's raining, the streets are wet. It's raining.
+  Therefore, the streets are wet.
+  [(*modus ponens*)]{.side}
+* [MT]{} If it's raining, the streets are wet. The streets aren't wet.  Therefore, it's not raining.
+  [(*modus tollens*)]{.side}
+
+
+```markdown
+* [MP]{} If it's raining, the streets are wet. It's raining.
+  Therefore, the streets are wet.
+  [(*modus ponens*)]{.side}
+* [MT]{} If it's raining, the streets are wet. The streets aren't wet.  Therefore, it's not raining.
+  [(*modus tollens*)]{.side}
+```
+
+If an item consists of several blocks, the side comment must be
+a Span at the very end of the last block.
+
+Side comments are only typeset in HTML and LaTeX. In other output
+formats, they appear at the end of the item's text separated by 
+a single space.
+
+They are typeset slightly differently in HTML and LaTeX output. 
+In HTML output, they appear next to the top of the item (by default,
+this can be changed with a custom CSS). In LaTeX, they appear
+at the right of the last line of the item.
+
 ### Customization
 
 Filter options can be specified in the document's metadata (YAML
@@ -325,6 +357,21 @@ Details
 \end{itemize}
 ```
 
+With a side comment:
+
+``` latex
+\begin{itemize}
+\tightlist
+
+\item[MP)] If it's raining, the streets are wet. It's raining.
+Therefore, the streets are wet. \hfill modus ponens
+
+\item[MT)] If it's raining, the streets are wet. The streets aren't wet.
+Therefore, it's not raining. \hfill modus tollens
+
+\end{itemize}
+```
+
 ### HTML output
 
 HTML output is placed in a `<div>`. 
@@ -341,6 +388,29 @@ HTML output is placed in a `<div>`.
     <p><span class="labelled-lists-label">(<strong>Conclusion</strong>)</span> This third item consists of</p>
     <p>two blocks.</p>
   </div>
+</div>
+```
+
+With side comments:
+
+``` html
+<div class="labelled-lists-list">
+<div class="labelled-lists-item"
+style="display:flex; flex-direction: row;">
+<div>
+<span class="labelled-lists-label">MP)</span> If it’s raining, the
+streets are wet. It’s raining. Therefore, the streets are wet.
+</div>
+<p class="labelled-lists-side">modus ponens</p>
+</div>
+<div class="labelled-lists-item"
+style="display:flex; flex-direction: row;">
+<div>
+<span class="labelled-lists-label">MT)</span> If it’s raining, the
+streets are wet. The streets aren’t wet. Therefore, it’s not raining.
+</div>
+<p class="labelled-lists-side">modus tollens</p>
+</div>
 </div>
 ```
 

@@ -21,9 +21,11 @@
 --- Options map, including defaults.
 -- @disable_citations boolean whether to use pandoc-crossref cite syntax
 -- @delimiter list label delimiters (as a list)
+-- @text_base_direction: ltr or rtl text (read from meta.dir)
 local options = {
     disable_citations = false,
     delimiter = {'(',')'},
+    text_base_direction = 'ltr'
 }
 
 -- target_formats  filter is triggered when those formats are targeted
@@ -38,6 +40,7 @@ local html_classes = {
     item = 'labelled-lists-item',
     label = 'labelled-lists-label',
     list = 'labelled-lists-list',
+    side = 'labelled-lists-side',
 }
 
 -- Css to be used later
@@ -207,25 +210,21 @@ function style_label(label, delim)
     return styled_label
 end
 
---- build_list: processes a custom label list
--- returns a list of blocks containing Raw output format code
--- @param element BulletList the original Bullet List element
+---ends_with_side_span: does a block end with Span of 'side' class
+---@param block pandoc.Block
+---@return boolean
+function ends_with_side_span(block)
+    return #block.c > 1
+        and block.c:at(-1).t == 'Span'
+        and block.c:at(-1).classes:includes('side')
+        and true or false
+end
+
+---build_list: processes a custom label list
+---@param element pandoc.BulletList the original Bullet List element
+---@return pandoc.Blocks list blocks contain Raw output formatting
 function build_list(element)
-
-    -- build a list of blocks
     local list = pandoc.List:new()
-
-    -- start
-
-    if FORMAT:match('latex') then
-        list:insert(pandoc.RawBlock('latex',
-            '\\begin{itemize}\n\\tightlist'
-            ))
-    elseif FORMAT:match('html') then
-        list:insert(pandoc.RawBlock('html',
-            '<div class="' .. html_classes['list'] .. '">'
-            ))
-    end
 
     -- does the first span have a delimiter attribute?
     -- element.c[1] is the first item in the list, type blocks
@@ -237,11 +236,23 @@ function build_list(element)
         delim = read_delimiter(span.attributes.delimiter)
     end
 
+    -- start
+
+    if FORMAT:match('latex') then
+        list:insert(pandoc.RawBlock('latex',
+            '\\begin{itemize}\n\\tightlist'
+            ))
+    elseif FORMAT:match('html') then
+        list:insert(pandoc.RawBlock('html',
+            '<div class="'..html_classes['list']..'">'
+            ))
+    end
+
     -- process each item
 
     for _,blocks in ipairs(element.c) do
 
-        -- get the span, remove it from the tree, store its content
+        -- remove the label Span and store its content
         local span = blocks[1].c[1]
         blocks[1].c:remove(1)
         local label = pandoc.List(span.content)
@@ -258,6 +269,12 @@ function build_list(element)
             end
         end
 
+        -- remove and store side Span at the end if present
+        local side_inlines = nil
+        if ends_with_side_span(blocks[#blocks]) then
+            side_inlines = blocks[#blocks].c:remove().c
+        end
+
         if FORMAT:match('latex') then
 
             local inlines = pandoc.List:new()
@@ -269,49 +286,95 @@ function build_list(element)
                 inlines:insert(pandoc.Span('', {id = id}))
             end            
 
-            -- if the first block is Plain or Para, we insert
-            -- the label code at the beginning
-            -- otherwise we add a Plain block for the label
+            -- insert label span in blocks' first Plain or Para
+            -- create Plain if needed
             if blocks[1].t == 'Plain' or blocks[1].t == 'Para' then
                 inlines:extend(blocks[1].c)
                 blocks[1].c = inlines
-                list:extend(blocks)
             else
-                list:insert(pandoc.Plain(inlines))
-                list:extend(blocks)
+                blocks:insert(1, pandoc.Plain(inlines))
             end
 
+            -- if side inlines, add them to the last block
+            -- must be a Para or Plain; create a self-standing one if needed
+            if side_inlines then
+                side_inlines:insert(1,
+                    pandoc.RawInline('latex','\\hfill ')
+                )
+                if blocks[#blocks].t == 'Plain' 
+                or blocks[#blocks].t == 'Para' then
+                    blocks[#blocks].c:extend(side_inlines)
+                else
+                    blocks:insert(pandoc.Plain(side_inlines))
+                end
+            end
+
+            list:extend(blocks)
+                
         elseif FORMAT:match('html') then
 
             local label_span = pandoc.Span(style_label(label, delim))
             label_span.classes = { html_classes['label'] }
             if id then label_span.identifier = id end
 
-            -- if there is only one block and it's Plain or Para,
-            -- we create the item as <p>, otherwise as <div>
-            if #blocks == 1 and 
-                (blocks[1].t == 'Plain' or blocks[1].t == 'Para') then
-                    local inlines = pandoc.List:new()
-                    inlines:insert(1, pandoc.RawInline('html', 
-                        '<p class="' .. html_classes['item'] .. '">'))
-                    inlines:insert(label_span)
-                    inlines:extend(blocks[1].c)
-                    inlines:insert(pandoc.RawInline('html', '</p>'))
-                    list:insert(pandoc.Plain(inlines))
+            -- insert label span in blocks' first Plain or Para
+            -- create Plain if needed
+            if blocks[1].t == 'Plain' or blocks[1].t == 'Para' then
+                blocks[1].c:insert(1, label_span)
             else
-                -- if the first block is Plain or Para we insert the
-                -- label in it, otherwise the label is its own paragraph
-                if (blocks[1].t == 'Plain' or blocks[1].t == 'Para') then
-                    local inlines = pandoc.List:new()
-                    inlines:insert(label_span)
-                    inlines:extend(blocks[1].c)
-                    blocks[1].c = inlines
-                else
-                    blocks:insert(1, pandoc.Para(label_span))
-                end
+                blocks:insert(1, pandoc.Plain({label_span}))
+            end
+
+            -- if single Plain/Para block without side inlines, 
+            -- we create it as a single <p> with list item classes
+            if #blocks == 1 and 
+                (blocks[1].t == 'Plain' or blocks[1].t == 'Para') 
+                and not side_inlines then
+
+                    blocks[1].c:insert(1, pandoc.RawInline('html', 
+                        '<p class="'..html_classes['item']..'>'))
+                    blocks[1].c:insert(pandoc.RawInline('html', '</p>'))
+                    list:insert(pandoc.Plain(blocks[1].c))
+
+            -- if multiple blocks but no side inline we create as a Div
+            elseif not side_inlines then
 
                 list:insert(pandoc.Div(blocks,  
                     { class = html_classes['item'] } ))        
+
+            -- if side inlines our list item is a flex Div container
+            -- with one <div> for the item's blocks
+            -- and one <p> class 'labelled-list-side' 
+            -- order depends on text direction
+            else
+
+                local divs = pandoc.List:new({
+                    pandoc.Div(blocks)
+                })
+
+                side_inlines:insert(1,
+                    pandoc.RawInline('html', '<p'
+                    ..' class="'..html_classes['side']..'"'
+                    ..'>'
+                )) 
+                side_inlines:insert(
+                    pandoc.RawInline('html', '</p>')
+                )
+
+                if options.text_base_direction == 'ltr' then
+                    divs:insert(pandoc.Plain(side_inlines))
+                else
+                    divs:insert(1, pandoc.Plain(side_inlines))
+                end
+
+                local flex_dir = options.text_base_direction == 'ltr'
+                and 'flex-direction: row;' or 'flex-direction: row-reverse;'
+
+                list:insert(pandoc.Div(divs,
+                    { class = html_classes['item'],
+                      style = 'display:flex; '..flex_dir
+                    }
+                ))
 
             end
  
@@ -398,6 +461,10 @@ function get_options(meta)
         local delim = read_delimiter(pandoc.utils.stringify(
                         meta['labelled-lists'].delimiter))
         if delim then options.delimiter = delim end
+    end
+
+    if meta.dir and pandoc.utils.stringify(meta.dir) == 'rtl' then
+        options.text_base_direction = 'rtl'
     end
 
   end

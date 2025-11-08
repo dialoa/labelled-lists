@@ -137,6 +137,45 @@ Crossreferencing items with links
 The claim \hyperref[A1ref]{\textbf{A1}} together with
 \hyperref[A2ref]{the next claim} entail (\hyperref[Cref]{\emph{C}}).
 
+\section{Side comments on list items}\label{side-comments-on-list-items}
+
+We can add a side comment (inlines) to selected items in the list.
+
+\begin{itemize}
+\tightlist
+
+\item[A1)] This is the text of a list item. We add a comment to the
+right side. The comment must be a span element with class \texttt{side}
+at the very end of the item. \hfill \emph{demonstration}
+
+\item[A2)] Side comments can be added to list items consisting of
+several blocks. They should be the last span of the last paragraph, with
+class \texttt{side}. They are shown next the the topmost paragraph in
+HTML, but at the right of the last line in LaTeX.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et massa
+ut eros volutpat gravida ut vel lacus. Proin turpis eros, imperdiet sed
+quam eget, bibendum aliquam massa. Phasellus pellentesque egestas
+dapibus. Proin porta tellus id orci consectetur bibendum. Nam eu cursus
+quam. Etiam vehicula in mi sed interdum. Duis rutrum eleifend
+consectetur. Phasellus ullamcorper, urna at vestibulum venenatis, tellus
+erat luctus nibh, eget hendrerit justo enim nec magna. Duis mollis ac
+felis ac tristique. \hfill \emph{very long demonstration spanning
+multiple lines}
+
+\item[A3)] This items has no side content. Lorem ipsum dolor sit amet,
+consectetur adipiscing elit. Donec et massa ut eros volutpat gravida ut
+vel lacus. Proin turpis eros, imperdiet sed quam eget, bibendum aliquam
+massa. Phasellus pellentesque egestas dapibus. Proin porta tellus id
+orci consectetur bibendum. Nam eu cursus quam. Etiam vehicula in mi sed
+interdum. Duis rutrum eleifend consectetur. Phasellus ullamcorper, urna
+at vestibulum venenatis, tellus erat luctus nibh, eget hendrerit justo
+enim nec magna. Duis mollis ac felis ac tristique.
+
+\end{itemize}
+
+This final block is outside of the list.
+
 \section{More examples and tests}\label{more-examples-and-tests}
 
 \subsection{Math formulas}\label{math-formulas}

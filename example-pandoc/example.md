@@ -11,7 +11,7 @@ Default delimiter format set to  "...)".
 
 Labelled list
 
-* [Premise 1]{} This is the first claim. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+* [Premise 1]{} This is the first claim. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 * [Premise 2]{} This is the second claim. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
 * [Conclusion]{} This is the conclusion. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
 
@@ -44,6 +44,32 @@ Crossreferencing items with links
 
 The claim [](#A1ref) together with [the next claim](#A2ref) 
 entail ([](#Cref)).
+
+# Side comments on list items
+
+We can add a side comment (inlines) to selected items in the list.
+
+* [A1]{} This is the text of a list item. We add a comment to the right side. The comment must be a span element with class `side` at the very end of the item. [*demonstration*]{.side}
+* [A2]{} Side comments can be added to list items consisting of several blocks. They should be the last span of the last paragraph, with class `side`. They are shown next the the topmost paragraph in HTML, but at the right of the last line in LaTeX. 
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et
+  massa ut eros volutpat gravida ut vel lacus. Proin turpis eros, imperdiet sed
+  quam eget, bibendum aliquam massa. Phasellus pellentesque egestas dapibus.
+  Proin porta tellus id orci consectetur bibendum. Nam eu cursus quam. Etiam
+  vehicula in mi sed interdum. Duis rutrum eleifend consectetur. Phasellus
+  ullamcorper, urna at vestibulum venenatis, tellus erat luctus nibh, eget
+  hendrerit justo enim nec magna. Duis mollis ac felis ac tristique.
+  [*very long demonstration spanning multiple lines*]{.side}
+
+* [A3]{} This items has no side content. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et
+  massa ut eros volutpat gravida ut vel lacus. Proin turpis eros, imperdiet sed
+  quam eget, bibendum aliquam massa. Phasellus pellentesque egestas dapibus.
+  Proin porta tellus id orci consectetur bibendum. Nam eu cursus quam. Etiam
+  vehicula in mi sed interdum. Duis rutrum eleifend consectetur. Phasellus
+  ullamcorper, urna at vestibulum venenatis, tellus erat luctus nibh, eget
+  hendrerit justo enim nec magna. Duis mollis ac felis ac tristique.
+
+This final block is outside of the list. 
 
 # More examples and tests
 
