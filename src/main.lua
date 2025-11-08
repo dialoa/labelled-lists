@@ -3,7 +3,7 @@
 @author Julien Dutant <julien.dutant@kcl.ac.uk>
 @copyright 2021-2024 Julien Dutant
 @license MIT - see LICENSE file for details.
-@release 0.4.0
+@release 0.4.1
 
 @TODO style the HTML output
 @TODO in HTML, leave the BulletList element as is. 
@@ -332,7 +332,7 @@ function build_list(element)
                 and not side_inlines then
 
                     blocks[1].c:insert(1, pandoc.RawInline('html', 
-                        '<p class="'..html_classes['item']..'>'))
+                        '<p class="'..html_classes['item']..'">'))
                     blocks[1].c:insert(pandoc.RawInline('html', '</p>'))
                     list:insert(pandoc.Plain(blocks[1].c))
 
