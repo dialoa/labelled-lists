@@ -8,7 +8,7 @@ Labelled lists in Pandoc and Quarto
 
 Quarto/Pandoc extension to create labelled lists.
 
-Copyright 2021-2024 [Philosophie.ch][Philoch] under MIT License, see
+Copyright 2021-2025 [Philosophie.ch][Philoch] under MIT License, see
 LICENSE file for details.
 
 Maintained by [Julien Dutant][JDutant].
